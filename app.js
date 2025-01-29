@@ -1,10 +1,28 @@
-const { readFileSync, writeFileSync } = require("fs");
+const { readFile, writeFile } = require("fs");
 
-const firstText = readFileSync("./content/subfolder/text.txt", "utf8");
+readFile("./content/first.txt", "utf8", (err, result) => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  const first = result;
+  readFile("./content/second.txt", "utf8", (err, result) => {
+    if (err) {
+      console.log(err);
 
-console.log(firstText);
-
-writeFileSync(
-  "./content/result-syc.txt",
-  `hello herer is the result ${firstText}`
-);
+      return;
+    }
+    const second = result;
+    writeFile(
+      "./content/async-result.txt",
+      ` Here is the result : ${first} and ${second}`,
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        console.log(result);
+      }
+    );
+  });
+});
