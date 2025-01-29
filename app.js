@@ -1,8 +1,13 @@
-const names = require("./name");
-const sayHi = require("./utils");
+const os = require('os')
 
-const { john, peter } = names;
+console.log(os.userInfo());
 
-sayHi("susan");
-sayHi(john);
-sayHi(peter);
+const currentOS = {
+    name: os.type(),
+    relaase: os.release(),
+    totalMem: os.totalmem(),
+    frreMem:os.freemem()
+}
+
+console.log(currentOS);
+
